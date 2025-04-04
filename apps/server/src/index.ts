@@ -5,6 +5,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import sequelize from "./config/database";
 import authRoutes from "./routes/auth";
+import courseRoutes from "./routes/courses";
 
 dotenv.config();
 
@@ -12,19 +13,24 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 
 // RoutesP
 app.get("/", (req, res) => {
-  res.send("LearnX API is running");
+  res.send("LearnX API is running smoothly!");
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/courses", courseRoutes);
 
-// Error handling middleware
 app.use(
   (
     err: any,
@@ -41,7 +47,7 @@ app.use(
 
 // Connect to database and start server
 sequelize
-  .sync()
+  .authenticate()
   .then(() => {
     console.log("Database connected");
     app.listen(port, () => {

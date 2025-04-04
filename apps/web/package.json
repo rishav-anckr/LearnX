@@ -13,10 +13,13 @@
   "dependencies": {
     "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.0",
+    "axios": "^1.8.4",
+    "axois": "0.0.1-security",
     "next": "^15.2.1",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.55.0",
     "tailwindcss": "^4.1.0"
   },
   "devDependencies": {
